@@ -1,0 +1,31 @@
+<% content_for(:title) do %>
+  LongDrinks (<%= @cocktails.count %> cocktails so far...)
+<% end %>
+
+<% content_for(:description) do %>
+  LongDrinks let you discover no less than <%= @cocktails.count %> cocktails
+<% end %>
+
+<!-- ici un restaurants.each || do avec plein de ruby pour générer du HTML bootstrap -->
+
+<div>
+  <h1>Cocktails list:</h1>
+  <% @cocktails.each do |cktl| %>
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title" ><%= cktl.name %></h3>
+      </div>
+      <div class="panel-body">
+        <%= link_to " show", cocktail_path(cktl) %>
+        <%= link_to " edit", edit_cocktail_path(cktl) %>
+        <%= link_to " delete", cocktail_path(cktl),
+        method: :delete,
+        data: { confirm: "Are you sure ?" } %>
+      </div>
+    </div>
+  <% end %>
+</div>
+<br>
+<div>
+  <%= link_to "Create a new cocktail", new_cocktail_path %>
+</div>

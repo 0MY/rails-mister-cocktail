@@ -1,0 +1,7 @@
+<%= simple_form_for(@cocktail) do |f| %>
+  <%= f.error_notification  %>
+  <!-- [...] all the fields -->
+  <%= f.input :name, placeholder: "Kir Royal" %>
+
+  <%= f.submit "Go for this cocktail !", class: "btn btn-primary" %>
+<% end %>
