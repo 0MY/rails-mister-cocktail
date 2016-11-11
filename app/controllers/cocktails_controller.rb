@@ -33,6 +33,8 @@ class CocktailsController < ApplicationController
     else
       # le render fait tourner les validations
       # et affichera les messages d'erreur correspondants
+      # avant de revenir sur la page de l'edit (méthode edit()
+      # pour redemander les infos via le formulaire)
       render :edit
     end
   end
@@ -51,6 +53,5 @@ class CocktailsController < ApplicationController
   def cocktail_params
     params.require(:cocktail).permit(:name)
   end
-
 end
 

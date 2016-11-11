@@ -40,6 +40,7 @@
 <hr>
 
 <h2>Add a new dose</h2>
+<!-- En fait le simple_form_for de Rails est informé qu'il doit appeler la méthode create du DosesController du fait de la pile d'appel des paramètres fournis dans le tableau [@cocktail, @dose] -->
 <%= simple_form_for [@cocktail, @dose] do |f| %>
   <%= f.association :ingredient %>
   <%= f.input :description %>
