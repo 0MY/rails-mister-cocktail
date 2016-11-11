@@ -3,4 +3,7 @@ class Ingredient < ApplicationRecord
 
   validates :name, presence: true, uniqueness: true
 
+  # permet de trier par odre alphabétique à chaque fois qu'on les appelle tous
+  default_scope -> { order(name: :ASC) }
+
 end

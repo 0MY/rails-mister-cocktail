@@ -60,6 +60,7 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'rspec-rails', group: [ :test ]
 
 
+# Only these gems will be pushed to the production server
 group :production do
  gem 'rails_12factor'
 end

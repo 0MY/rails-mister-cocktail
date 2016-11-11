@@ -6,21 +6,44 @@
   LongDrinks | <%= @cocktail.name %>
 <% end %>
 
+
+<div>
+  <h1>Cocktail details</h1>
+  <%= link_to "Back to cocktails list", cocktails_path %> | <%= link_to "Edit cocktail name", edit_cocktail_path(@cocktail) %>
+</div>
+
+<hr>
+
 <div class="well well-lg">
   <h1><%= @cocktail.name %></h1>
 </div>
-<div class="well well-lg">
 
 <div class="well well-lg">
 <p class="text-muted">
   <ul>
-    <% @cocktail.ingredients.all.each do |ingr| %>
-      <li><%= ingr.name %></li>
+    <% @cocktail.doses.each do |dse| %>
+      <!-- le if dse.persisted? permet de ne pas rajouter la dose à la liste qui s'affichera si la création de dose est refusée par la validation -->
+      <% if dse.persisted? %>
+      <!-- Pour chaque coktail, on va chercher la description de la dose, le nom de l'ingrédient correspondant et le dessin d'une croix (pour le delete) pour les afficher -->
+        <li>
+          <%= dse.description %> <%= dse.ingredient.name %>
+          <!-- A partir de l'objet passé en paramètre dose (dse), Rails va aller chercher la route correspondante (en plus ici via sa methode DELETE) -->
+          <!-- Le &times est le code HTML d'un caractère représentant une petite croix. Le .html_safe permet de ne pas se faire jeter par le navigateur et lui préciser que c'est bien un code HTML (je crois) -->
+          <%= link_to "&times;".html_safe, dse, method: :delete %>
+        </li>
+      <% end %>
     <% end %>
   </ul>
 </p>
 </div>
 
-<div>
-  <%= link_to "Back to cocktails list", cocktails_path %> | <%= link_to "Edit cocktail", edit_cocktail_path(@cocktail) %>
-</div>
+<hr>
+
+<h2>Add a new dose</h2>
+<%= simple_form_for [@cocktail, @dose] do |f| %>
+  <%= f.association :ingredient %>
+  <%= f.input :description %>
+  <%= f.button :submit %>
+<% end %>
+
+

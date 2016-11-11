@@ -1,49 +1,27 @@
 class DosesController < ApplicationController
-  before_action :find_dose, only: [:show, :edit, :update, :destroy]
-
-  def index
-    @doses = Dose.sorted_by_ratings
-  end
-
-  def show
-  end
-
-  def new
-    @dose = Dose.new
-  end
 
   def create
-    @dose = Dose.new(dose_params)
+    @cocktail = Cocktail.find(params[:cocktail_id])
+    @dose = @cocktail.doses.new(dose_params)
+
     if @dose.save
-      redirect_to dose_path(@dose)
+      redirect_to @cocktail
     else
-      render :new
-    end
-  end
-
-  def edit
-  end
-
-  def update
-    if @dose.update(dose_params)
-      redirect_to dose_path(@dose)
-    else
-      render :edit
+      # le render fait tourner les validations
+      # et affichera les messages d'erreur correspondants
+      render 'cocktails/show'
     end
   end
 
   def destroy
+    @dose = Dose.find(params[:id])
     @dose.destroy
-    redirect_to doses_path
+    redirect_to @dose.cocktail
   end
 
   private
 
   def dose_params
-    params.require(:dose).permit(:name)
-  end
-
-  def find_dose
-    @dose = Dose.find(params[:id])
+    params.require(:dose).permit(:description, :ingredient_id)
   end
 end
