@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>RailsMisterCocktail</title>
+    <!-- Permet d'afficher un titre par defaut si un autre titre n'a pas ete defini sur chaque page (cette version est un raccourci via un helper qui evite d'avoir a utiliser un ternaire pour verifier si il existe un titre pour chaque page et sinon d'en afficher un par defaut. Le code de yield_with_default se trouve dans app/helpers/application_helper.rb -->
+    <title><%= yield_with_default(:title, "LongDrinks") %></title>
     <%= csrf_meta_tags %>
 
     <!-- Add these line for detecting device width -->
@@ -13,6 +14,7 @@
 
   <body>
     <%= render 'layouts/navbar_wagon_without_login' %>
+    <%= render 'shared/flash' %>
     <%= yield %>
   </body>
 </html>

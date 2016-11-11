@@ -53,6 +53,7 @@ group :development do
   # Outils de debug
   gem "better_errors"
   gem "binding_of_caller"
+  gem 'figaro'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
