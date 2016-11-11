@@ -54,6 +54,7 @@ group :development do
   gem "better_errors"
   gem "binding_of_caller"
   gem 'figaro'
+  gem 'cloudinary', '1.1.0'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
